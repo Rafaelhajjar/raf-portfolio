@@ -123,28 +123,31 @@ export default function Home() {
             <ListItem>Bachelor of Science in Engineering in Artifical Intelligence (Expected 2027)</ListItem>
             <ListItem>Masters of Science in Engineering in Robotics (Expected 2027)</ListItem>
             <ListItem><Strong>Latymer Upper School</Strong> | London, England</ListItem>
-            <ListItem>A-Levels: 3 A*, 1 A | GCSEs: eleven 9s, two 8s</ListItem>
+            <ListItem>A-Levels: 3 A*, 1 A | GCSEs: eleven 9s, two 8s | SAT: 1560 </ListItem>
           </ul>
         </Section>
 
         <Section title="Experience">
           <ul style={{ listStyle: "none", paddingLeft: 0 }}>
-            <ListItem><Strong>Incoming Quantitative Researcher</Strong> | Point 72 (June 2025 – August 2025)</ListItem>
+            <ListItem><Strong>Quantitative Research Intern</Strong> | Point72 (June 2025 – August 2025)</ListItem>
+            <ListItem style={{ marginLeft: "1em" }}>Build machine learning models to predict stock market trends.</ListItem>
             <ListItem><Strong>Associate Consultant Intern: Advanced Analytics</Strong> | Bain & Company (June 2024 – August 2024)</ListItem>
-            <ListItem style={{ marginLeft: "1em" }}>Developed Gen AI strategy for asset management, boosting data analysis efficiency.</ListItem>
+            <ListItem style={{ marginLeft: "1em" }}>Due diligence, CLV Models, and RAG Chatbots.</ListItem>
             <ListItem><Strong>Data Science and Machine Learning Intern</Strong> | Danone (May 2023 – July 2023)</ListItem>
             <ListItem style={{ marginLeft: "1em" }}>Optimized pricing for 3,000+ SKUs using ML models.</ListItem>
             <ListItem><Strong>Research Intern</Strong> | MIT Biomimetic Robotics (May 2022 – July 2022)</ListItem>
             <ListItem style={{ marginLeft: "1em" }}>Designed Python-based simulations for artificial tendon deformation.</ListItem>
             <ListItem><Strong>Founder of Future Skills Program</Strong> | Jusoor (January 2020 – Present)</ListItem>
             <ListItem style={{ marginLeft: "1em" }}>Teaching 200+ refugees math, computer science, and robotics.</ListItem>
-             <ListItem><Strong>President Penn Autonomous Racing Club</Strong> | University of Pennsylvania (September 2023 – Present)</ListItem>
+            <ListItem><Strong>President, Penn Autonomous Racing Club</Strong> | University of Pennsylvania (September 2023 – Present)</ListItem>
             <ListItem style={{ marginLeft: "1em" }}>Leading autonomous racing club, guiding 20+ students.</ListItem>
           </ul>
         </Section>
 
         <Section title="Projects">
            <ul style={{ listStyle: "none", paddingLeft: 0 }}>
+           <ListItem><Strong> Neural Architectures for Financial Prediction </Strong> | Independent undergraduate research Upenn (2025)</ListItem>
+           <ListItem><Strong>Deformations in Neural Radiance Feilds</Strong> | Independent undergraduate research Upenn (2025)</ListItem>
             <ListItem><Strong>Overlapped handwriting recognition</Strong> | Independent undergraduate research Upenn (2024)</ListItem>
             <ListItem><Strong>Racing line optimization around banked corners (ML)</Strong> | Research with Dr Sung Upenn (2024)</ListItem>
             <ListItem><Strong>Self navigating model airplanes</Strong> | Research with Dr Frey and Dr Talebinejad at MIT (2023)</ListItem>
@@ -154,7 +157,8 @@ export default function Home() {
 
         <Section title="Awards">
           <ul style={{ listStyle: "none", paddingLeft: 0 }}>
-            <ListItem>British Mathematical Olympiad Round 2 | UKMT (2019, 2020, 2021, 2022)</ListItem>
+          <ListItem>Cubist Hackathon Finalist | Cubist/Point72 (2025)</ListItem>
+            <ListItem>International Mathematical Olympiad | IMO (2022)</ListItem>
             <ListItem>Physics Olympiad Top Gold (Top 0.1%) | BPhO (2021)</ListItem>
           </ul>
         </Section>
