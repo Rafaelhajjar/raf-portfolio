@@ -155,6 +155,23 @@ export default function Home() {
           </ul>
         </Section>
 
+        <Section title="Case Studies">
+          <ul style={{ listStyle: "none", paddingLeft: 0 }}>
+            <ListItem>
+              <a 
+                href="/case-studies/uk-home-improvement" 
+                style={{ 
+                  color: "#7c6f5f", 
+                  textDecoration: "underline",
+                  fontWeight: 600,
+                }}
+              >
+                <Strong>UK Home Improvement Industry Analysis</Strong>
+              </a> | 2024
+            </ListItem>
+          </ul>
+        </Section>
+
         <Section title="Awards">
           <ul style={{ listStyle: "none", paddingLeft: 0 }}>
           <ListItem>Cubist Hackathon Finalist | Cubist/Point72 (2025)</ListItem>
