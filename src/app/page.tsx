@@ -15,6 +15,7 @@ function getAge() {
 function AgeCounter() {
   const [age, setAge] = useState(getAge());
   const raf = useRef<number | undefined>(undefined);
+  const lifeExpectancy = 85;
 
   useEffect(() => {
     const update = () => {
@@ -29,8 +30,15 @@ function AgeCounter() {
     };
   }, []);
 
+  const progress = (age / lifeExpectancy) * 100;
+  const barLength = 25;
+  const filledLength = Math.floor((age / lifeExpectancy) * barLength);
+  const progressBar = "█".repeat(filledLength) + "░".repeat(barLength - filledLength);
+
   return (
-    <span style={{ fontVariantNumeric: "tabular-nums" }}>{age.toFixed(8)}</span>
+    <span style={{ fontVariantNumeric: "tabular-nums", fontFamily: "monospace" }}>
+      {age.toFixed(8)} / {lifeExpectancy} yrs [{progressBar}] {progress.toFixed(2)}%
+    </span>
   );
 }
 
@@ -105,7 +113,7 @@ export default function Home() {
           Rafael Hajjar
         </h1>
         <div style={{ fontSize: 14, marginBottom: 12, color: "#5a5247", textAlign: "left" }}>
-          <AgeCounter /> years old
+          <AgeCounter />
         </div>
         <div style={{ fontSize: 15, marginBottom: 32, color: "#6d655c", textAlign: "left", maxWidth: 700, fontStyle: "italic", lineHeight: 1.6 }}>
           Think, Learn, Build until the truth emerges.
@@ -146,28 +154,90 @@ export default function Home() {
 
         <Section title="Projects">
            <ul style={{ listStyle: "none", paddingLeft: 0 }}>
-           <ListItem><Strong> Neural Architectures for Financial Prediction </Strong> | Independent undergraduate research Upenn (2025)</ListItem>
+           <ListItem>
+             <Strong>
+               <a 
+                 href="https://github.com/Rafaelhajjar/3D-Hand-Pose-Estimation" 
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 style={{ color: "#3a3631", textDecoration: "underline", textDecorationColor: "#7c6f5f" }}
+               >
+                 3D Hand Pose Estimation
+               </a>
+             </Strong> | Independent undergraduate research Upenn (2024)
+           </ListItem>
+           <ListItem>
+             <Strong>
+               <a 
+                 href="https://github.com/Rafaelhajjar/Neural-Architectures-for-Financial-Prediction" 
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 style={{ color: "#3a3631", textDecoration: "underline", textDecorationColor: "#7c6f5f" }}
+               >
+                 Neural Architectures for Financial Prediction
+               </a>
+             </Strong> | Independent undergraduate research Upenn (2025)
+           </ListItem>
            <ListItem><Strong>Deformations in Neural Radiance Feilds</Strong> | Independent undergraduate research Upenn (2025)</ListItem>
-            <ListItem><Strong>Overlapped handwriting recognition</Strong> | Independent undergraduate research Upenn (2024)</ListItem>
+           <ListItem>
+             <Strong>
+               <a 
+                 href="/case-studies/uk-home-improvement" 
+                 style={{ color: "#3a3631", textDecoration: "underline", textDecorationColor: "#7c6f5f" }}
+               >
+                 UK Home Improvement Industry Analysis
+               </a>
+             </Strong> | Point 72 Case Study (2024)
+           </ListItem>
+            <ListItem>
+              <Strong>
+                <a 
+                  href="https://github.com/Rafaelhajjar/Overlayed-Words-Detection" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "#3a3631", textDecoration: "underline", textDecorationColor: "#7c6f5f" }}
+                >
+                  Overlapped handwriting recognition
+                </a>
+              </Strong> | Independent undergraduate research Upenn (2024)
+            </ListItem>
+            <ListItem>
+              <Strong>
+                <a 
+                  href="https://github.com/Rafaelhajjar/Hydration-via-urine-picture-app" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "#3a3631", textDecoration: "underline", textDecorationColor: "#7c6f5f" }}
+                >
+                  Hydration Tracking via Urine Analysis (iOS App)
+                </a>
+              </Strong> | Independent project (2024)
+            </ListItem>
+            <ListItem>
+              <Strong>
+                <a 
+                  href="https://github.com/Rafaelhajjar/Sudoku-CNN-Solver" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "#3a3631", textDecoration: "underline", textDecorationColor: "#7c6f5f" }}
+                >
+                  Sudoku CNN Solver
+                </a>
+              </Strong> | Deep learning approach to puzzle solving (2024)
+            </ListItem>
             <ListItem><Strong>Racing line optimization around banked corners (ML)</Strong> | Research with Dr Sung Upenn (2024)</ListItem>
             <ListItem><Strong>Self navigating model airplanes</Strong> | Research with Dr Frey and Dr Talebinejad at MIT (2023)</ListItem>
-            <ListItem><Strong>Artificial tendon deformation analysis for use on Cheetah robot</Strong> | Research with MIT Biomimetic laboratory (2022)</ListItem>
-          </ul>
-        </Section>
-
-        <Section title="Case Studies">
-          <ul style={{ listStyle: "none", paddingLeft: 0 }}>
             <ListItem>
-              <a 
-                href="/case-studies/uk-home-improvement" 
-                style={{ 
-                  color: "#7c6f5f", 
-                  textDecoration: "underline",
-                  fontWeight: 600,
-                }}
-              >
-                <Strong>UK Home Improvement Industry Analysis</Strong>
-              </a> | 2024
+              <Strong>
+                <a 
+                  href="https://biomimetics.mit.edu/" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "#3a3631", textDecoration: "underline", textDecorationColor: "#7c6f5f" }}
+                >
+                  Artificial tendon deformation analysis for use on Cheetah robot
+                </a>
+              </Strong> | Research with MIT Biomimetic laboratory (2022)
             </ListItem>
           </ul>
         </Section>
@@ -178,6 +248,40 @@ export default function Home() {
             <ListItem>International Mathematical Olympiad | IMO (2022)</ListItem>
             <ListItem>Physics Olympiad Top Gold (Top 0.1%) | BPhO (2021)</ListItem>
           </ul>
+        </Section>
+
+        <Section title="What I'm reading">
+          <div style={{ marginBottom: 16 }}>
+            <div style={{ fontWeight: 600, fontSize: 15, marginBottom: 8, color: "#3a3631" }}>📚 Interesting Reads</div>
+            <ul style={{ listStyle: "none", paddingLeft: 0 }}>
+              <ListItem><em>Moonwalking with Einstein</em> by Joshua Foer</ListItem>
+            </ul>
+          </div>
+          <div>
+            <div style={{ fontWeight: 600, fontSize: 15, marginBottom: 8, color: "#3a3631" }}>📄 Papers I am getting inspired by</div>
+            <ul style={{ listStyle: "none", paddingLeft: 0 }}>
+              <ListItem>
+                <a 
+                  href="https://arxiv.org/abs/2511.15038" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "#7c6f5f", textDecoration: "underline" }}
+                >
+                  Aligning Generative Music AI with Human Preferences
+                </a> | Herremans & Roy (2025)
+              </ListItem>
+              <ListItem>
+                <a 
+                  href="https://www.princeton.edu/~mwatson/papers/dfm_oup_4.pdf" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "#7c6f5f", textDecoration: "underline" }}
+                >
+                  Dynamic Factor Models
+                </a> | Stock & Watson (2010)
+              </ListItem>
+            </ul>
+          </div>
         </Section>
 
         <Section title="Contact">
@@ -206,6 +310,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
             style={{
+              marginRight: 20,
               color: "#7c6f5f",
               textDecoration: "none",
               fontWeight: 600,
@@ -215,6 +320,21 @@ export default function Home() {
             onMouseOut={e => (e.currentTarget.style.color = '#7c6f5f')}
           >
             GitHub
+          </a>
+          <a
+            href="https://x.com/rafaelhajjar"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: "#7c6f5f",
+              textDecoration: "none",
+              fontWeight: 600,
+              transition: "color 0.2s",
+            }}
+            onMouseOver={e => (e.currentTarget.style.color = '#bfae99')}
+            onMouseOut={e => (e.currentTarget.style.color = '#7c6f5f')}
+          >
+            X
           </a>
         </div>
       </main>
