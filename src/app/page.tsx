@@ -245,7 +245,7 @@ export default function Home() {
         <Section title="Awards">
           <ul style={{ listStyle: "none", paddingLeft: 0 }}>
           <ListItem>Cubist Hackathon Finalist | Cubist/Point72 (2025)</ListItem>
-            <ListItem>International Mathematical Olympiad | IMO (2022)</ListItem>
+            <ListItem>United Kingdom Mathematical Olympiad Round 2 | UKMT (2019-2022)</ListItem>
             <ListItem>Physics Olympiad Top Gold (Top 0.1%) | BPhO (2021)</ListItem>
           </ul>
         </Section>
