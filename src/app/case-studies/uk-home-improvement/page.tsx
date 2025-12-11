@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function UKHomeImprovementCaseStudy() {
   return (
     <div
@@ -28,7 +30,7 @@ export default function UKHomeImprovementCaseStudy() {
         <h1 style={{ fontWeight: 700, fontSize: 20, color: "#3a3631", letterSpacing: "-0.5px" }}>
           UK Home Improvement Industry Case Study
         </h1>
-        <a
+        <Link
           href="/"
           style={{
             color: "#7c6f5f",
@@ -38,7 +40,7 @@ export default function UKHomeImprovementCaseStudy() {
           }}
         >
           ← Back to Portfolio
-        </a>
+        </Link>
       </header>
       
       <main
