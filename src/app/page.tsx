@@ -178,7 +178,16 @@ export default function Home() {
                </a>
              </Strong> | Independent undergraduate research Upenn (2025)
            </ListItem>
-           <ListItem><Strong>Deformations in Neural Radiance Feilds</Strong> | Independent undergraduate research Upenn (2025)</ListItem>
+           <ListItem>
+             <Strong>
+               <a 
+                 href="/case-studies/nerf-deformation" 
+                 style={{ color: "#3a3631", textDecoration: "underline", textDecorationColor: "#7c6f5f" }}
+               >
+                 Deformations in Neural Radiance Fields
+               </a>
+             </Strong> | Independent undergraduate research Upenn (2025)
+           </ListItem>
            <ListItem>
              <Strong>
                <a 
@@ -246,7 +255,7 @@ export default function Home() {
           <ul style={{ listStyle: "none", paddingLeft: 0 }}>
           <ListItem>Cubist Hackathon Finalist | Cubist/Point72 (2025)</ListItem>
             <ListItem>United Kingdom Mathematical Olympiad Round 2 | UKMT (2019-2022)</ListItem>
-            <ListItem>Physics Olympiad Top Gold (Top 0.1%) | BPhO (2021)</ListItem>
+            <ListItem>Physics Olympiad Top Gold (Top 0.1%) | BPhO (2022)</ListItem>
           </ul>
         </Section>
 
