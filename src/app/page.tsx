@@ -116,7 +116,7 @@ export default function Home() {
           <AgeCounter />
         </div>
         <div style={{ fontSize: 15, marginBottom: 32, color: "#6d655c", textAlign: "left", maxWidth: 700, fontStyle: "italic", lineHeight: 1.6 }}>
-          Think, Learn, Build until the truth emerges.
+          "He not busy being born is busy dying"
         </div>
 
         <Section title="About" defaultOpen={true}>
@@ -137,6 +137,8 @@ export default function Home() {
 
         <Section title="Experience">
           <ul style={{ listStyle: "none", paddingLeft: 0 }}>
+            <ListItem><Strong>Economics Intern</Strong> | Ramp (January 2026 – May 2026)</ListItem>
+            <ListItem style={{ marginLeft: "1em" }}>Building econometrics models for public research and for the ramp product.</ListItem>
             <ListItem><Strong>Quantitative Research Intern</Strong> | Point72 (June 2025 – August 2025)</ListItem>
             <ListItem style={{ marginLeft: "1em" }}>Build machine learning models to predict stock market trends.</ListItem>
             <ListItem><Strong>Associate Consultant Intern: Advanced Analytics</Strong> | Bain & Company (June 2024 – August 2024)</ListItem>
