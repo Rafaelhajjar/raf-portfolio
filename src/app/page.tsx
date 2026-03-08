@@ -116,7 +116,7 @@ export default function Home() {
           <AgeCounter />
         </div>
         <div style={{ fontSize: 15, marginBottom: 32, color: "#6d655c", textAlign: "left", maxWidth: 700, fontStyle: "italic", lineHeight: 1.6 }}>
-          "He not busy being born is busy dying"
+          &ldquo;He not busy being born is busy dying&rdquo;
         </div>
 
         <Section title="About" defaultOpen={true}>
