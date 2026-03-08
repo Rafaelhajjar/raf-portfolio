@@ -1,7 +1,11 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
-const ASCII_CHARS = ["·", "░", "▒", "∙", "○", "+", "~", "-", "×", "▪", "◦", "∘", "⌁", "⊹", "✦", "⋅"];
+const ASCII_CHARS = ["·", "░", "▒", "∙", "○", "+", "~", "-", "×", "▪", "◦", "∘", "⌁", "⊹", "✦", "⋅", "∴", "∵", "⁂", "※", "⊂", "⊃", "∩", "∪", "≈", "≠", "∞", "∂", "∑", "∏"];
+
+const RADIUS = 9; // collision radius per particle
+const NUM = 600;
+const MAX_SPEED = 0.6;
 
 function AsciiBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -13,7 +17,6 @@ function AsciiBackground() {
     if (!ctx) return;
 
     let animId: number;
-    const NUM = 80;
 
     type Particle = {
       x: number; y: number;
@@ -36,36 +39,58 @@ function AsciiBackground() {
       particles = Array.from({ length: NUM }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
         char: ASCII_CHARS[Math.floor(Math.random() * ASCII_CHARS.length)],
-        opacity: 0.04 + Math.random() * 0.1,
-        size: 10 + Math.floor(Math.random() * 8),
+        opacity: 0.10 + Math.random() * 0.13,
+        size: 9 + Math.floor(Math.random() * 7),
       }));
     };
     init();
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fontKerning = "none";
 
+      // Random walk nudge + move
       for (const p of particles) {
-        // Random walk nudge
-        p.vx += (Math.random() - 0.5) * 0.05;
-        p.vy += (Math.random() - 0.5) * 0.05;
-        // Clamp speed
+        p.vx += (Math.random() - 0.5) * 0.04;
+        p.vy += (Math.random() - 0.5) * 0.04;
         const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-        if (speed > 0.5) { p.vx *= 0.5 / speed; p.vy *= 0.5 / speed; }
-
+        if (speed > MAX_SPEED) { p.vx *= MAX_SPEED / speed; p.vy *= MAX_SPEED / speed; }
         p.x += p.vx;
         p.y += p.vy;
-
-        // Wrap around edges
         if (p.x < -20) p.x = canvas.width + 20;
         if (p.x > canvas.width + 20) p.x = -20;
         if (p.y < -20) p.y = canvas.height + 20;
         if (p.y > canvas.height + 20) p.y = -20;
+      }
 
+      // Collision detection (elastic, equal mass → swap velocity along normal)
+      const diameter = RADIUS * 2;
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const a = particles[i], b = particles[j];
+          const dx = b.x - a.x, dy = b.y - a.y;
+          const distSq = dx * dx + dy * dy;
+          if (distSq < diameter * diameter && distSq > 0) {
+            const dist = Math.sqrt(distSq);
+            const nx = dx / dist, ny = dy / dist;
+            // Relative velocity along normal
+            const dvn = (a.vx - b.vx) * nx + (a.vy - b.vy) * ny;
+            if (dvn > 0) { // only resolve if approaching
+              a.vx -= dvn * nx; a.vy -= dvn * ny;
+              b.vx += dvn * nx; b.vy += dvn * ny;
+              // Separate overlapping particles
+              const overlap = (diameter - dist) / 2;
+              a.x -= overlap * nx; a.y -= overlap * ny;
+              b.x += overlap * nx; b.y += overlap * ny;
+            }
+          }
+        }
+      }
+
+      // Draw
+      for (const p of particles) {
         ctx.globalAlpha = p.opacity;
         ctx.font = `${p.size}px monospace`;
         ctx.fillStyle = "#7c6f5f";
