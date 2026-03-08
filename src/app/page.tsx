@@ -1,6 +1,103 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
+const ASCII_CHARS = ["·", "░", "▒", "∙", "○", "+", "~", "-", "×", "▪", "◦", "∘", "⌁", "⊹", "✦", "⋅"];
+
+function AsciiBackground() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animId: number;
+    const NUM = 80;
+
+    type Particle = {
+      x: number; y: number;
+      vx: number; vy: number;
+      char: string;
+      opacity: number;
+      size: number;
+    };
+
+    let particles: Particle[] = [];
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    const init = () => {
+      particles = Array.from({ length: NUM }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        char: ASCII_CHARS[Math.floor(Math.random() * ASCII_CHARS.length)],
+        opacity: 0.04 + Math.random() * 0.1,
+        size: 10 + Math.floor(Math.random() * 8),
+      }));
+    };
+    init();
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fontKerning = "none";
+
+      for (const p of particles) {
+        // Random walk nudge
+        p.vx += (Math.random() - 0.5) * 0.05;
+        p.vy += (Math.random() - 0.5) * 0.05;
+        // Clamp speed
+        const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+        if (speed > 0.5) { p.vx *= 0.5 / speed; p.vy *= 0.5 / speed; }
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Wrap around edges
+        if (p.x < -20) p.x = canvas.width + 20;
+        if (p.x > canvas.width + 20) p.x = -20;
+        if (p.y < -20) p.y = canvas.height + 20;
+        if (p.y > canvas.height + 20) p.y = -20;
+
+        ctx.globalAlpha = p.opacity;
+        ctx.font = `${p.size}px monospace`;
+        ctx.fillStyle = "#7c6f5f";
+        ctx.fillText(p.char, p.x, p.y);
+      }
+
+      animId = requestAnimationFrame(draw);
+    };
+    draw();
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        pointerEvents: "none",
+        zIndex: 0,
+      }}
+    />
+  );
+}
+
 // Helper to get age in years (with decimals)
 function getAge() {
   // Paris time is CET/CEST, but for simplicity, use UTC+1 (CET) and adjust for DST if needed
@@ -99,16 +196,8 @@ export default function Home() {
         fontSize: 15,
       }}
     >
-      <main
-        style={{
-          maxWidth: 1100,
-          width: "100%",
-          padding: "48px 24px 32px 24px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-start",
-        }}
-      >
+      <AsciiBackground />
+      <main style={{ position: "relative", zIndex: 1, maxWidth: 1100, width: "100%", padding: "48px 24px 32px 24px", display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
         <h1 style={{ fontWeight: 700, fontSize: 22, marginBottom: 6, color: "#3a3631", letterSpacing: "-0.5px", textAlign: "left", lineHeight: 1.2 }}>
           Rafael Hajjar
         </h1>
