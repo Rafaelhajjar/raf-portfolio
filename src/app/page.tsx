@@ -135,7 +135,9 @@ function getAge() {
 }
 
 function AgeCounter() {
-  const [age, setAge] = useState(getAge());
+  // The current time is only known reliably in the browser. Starting empty keeps
+  // the server and client renders identical, then the animation fills it in.
+  const [age, setAge] = useState<number | null>(null);
   const raf = useRef<number | undefined>(undefined);
   const lifeExpectancy = 85;
 
@@ -152,14 +154,15 @@ function AgeCounter() {
     };
   }, []);
 
-  const progress = (age / lifeExpectancy) * 100;
+  const currentAge = age ?? 0;
+  const progress = (currentAge / lifeExpectancy) * 100;
   const barLength = 25;
-  const filledLength = Math.floor((age / lifeExpectancy) * barLength);
+  const filledLength = Math.floor((currentAge / lifeExpectancy) * barLength);
   const progressBar = "█".repeat(filledLength) + "░".repeat(barLength - filledLength);
 
   return (
     <span style={{ fontVariantNumeric: "tabular-nums", fontFamily: "monospace" }}>
-      {age.toFixed(8)} / {lifeExpectancy} yrs [{progressBar}] {progress.toFixed(2)}%
+      {age === null ? "Loading…" : age.toFixed(8)} / {lifeExpectancy} yrs [{progressBar}] {progress.toFixed(2)}%
     </span>
   );
 }
@@ -251,7 +254,9 @@ export default function Home() {
 
         <Section title="Experience">
           <ul style={{ listStyle: "none", paddingLeft: 0 }}>
-            <ListItem><Strong>Economics Intern</Strong> | Ramp (January 2026 – May 2026)</ListItem>
+            <ListItem><Strong>Applied AI Intern</Strong> | Ramp (May 2026 – August 2026)</ListItem>
+            <ListItem style={{ marginLeft: "1em" }}>Building the future of agentic finance.</ListItem>
+            <ListItem><Strong>Economics Intern</Strong> | Ramp (January 2026 – April 2026)</ListItem>
             <ListItem style={{ marginLeft: "1em" }}>Building econometrics models for public research and for the ramp product.</ListItem>
             <ListItem><Strong>Quantitative Research Intern</Strong> | Point72 (June 2025 – August 2025)</ListItem>
             <ListItem style={{ marginLeft: "1em" }}>Build machine learning models to predict stock market trends.</ListItem>
@@ -397,13 +402,13 @@ export default function Home() {
               </ListItem>
               <ListItem>
                 <a 
-                  href="https://www.princeton.edu/~mwatson/papers/dfm_oup_4.pdf" 
+                  href="https://academic.oup.com/ectj/article/21/1/C1/5056401"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ color: "#7c6f5f", textDecoration: "underline" }}
                 >
-                  Dynamic Factor Models
-                </a> | Stock & Watson (2010)
+                  Double/Debiased Machine Learning for Treatment and Structural Parameters
+                </a> | Chernozhukov et al. (2018)
               </ListItem>
             </ul>
           </div>
