@@ -209,6 +209,28 @@ const Strong = ({ children }: { children: React.ReactNode }) => (
   <strong style={{ fontWeight: 600 }}>{children}</strong>
 );
 
+// Add future citations to this list.
+const citations = [
+  {
+    title: "Agent Economics (The Agents Season, Episode 10)",
+    publication: "Linear Digressions",
+    href: "https://lineardigressions.substack.com/p/agent-economics-the-agents-season",
+    note: "Cites my research on business AI token costs in the episode notes.",
+  },
+  {
+    title: "Where the AI Money Goes",
+    publication: "The Backbone",
+    href: "https://www.thebackbone.ai/en/writing/where-the-ai-money-goes",
+    note: "Cites my research on AI spending and token costs.",
+  },
+  {
+    title: "Anthropic beats OpenAI on business adoption",
+    publication: "Ramp Economics Lab",
+    href: "https://ramp.com/data/ai-index-may-2026",
+    note: "Credits my analysis of image-token costs.",
+  },
+];
+
 export default function Home() {
   return (
     <div
@@ -377,6 +399,26 @@ export default function Home() {
           <ListItem>Cubist Hackathon Finalist | Cubist/Point72 (2025)</ListItem>
             <ListItem>United Kingdom Mathematical Olympiad Round 2 | UKMT (2019-2022)</ListItem>
             <ListItem>Physics Olympiad Top Gold (Top 0.1%) | BPhO (2022)</ListItem>
+          </ul>
+        </Section>
+
+        <Section title="Citations">
+          <ul style={{ listStyle: "none", paddingLeft: 0 }}>
+            {citations.map((citation) => (
+              <ListItem key={citation.href} style={{ marginBottom: "1em" }}>
+                <Strong>
+                  <a
+                    href={citation.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: "#3a3631", textDecoration: "underline", textDecorationColor: "#7c6f5f" }}
+                  >
+                    {citation.title}
+                  </a>
+                </Strong> | {citation.publication}
+                <div style={{ color: "#6d655c" }}>{citation.note}</div>
+              </ListItem>
+            ))}
           </ul>
         </Section>
 
